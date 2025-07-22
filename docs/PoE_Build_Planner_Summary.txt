@@ -1,0 +1,86 @@
+PoE Build Planner – Progress Summary (as of 2025‑07‑22)
+
+────────────────────────────────────────
+1. Environment & Repository Setup
+────────────────────────────────────────
+✓ Installed Python 3.13 and Git ≥2.x
+✓ Created public GitHub repo:  https://github.com/Chinmorph/poe-build-planner
+✓ Cloned repo locally
+✓ Configured Git identity (user.name / user.email)
+✓ Created and activated virtual environment `.venv`
+✓ Upgraded pip inside `.venv`
+✓ Added baseline project structure:
+    ├─ src/
+    ├─ scripts/
+    ├─ data/
+    └─ requirements.txt   (requests, tqdm)
+✓ Initial commit & push (“Skeleton”)
+
+────────────────────────────────────────
+2. Data Import
+────────────────────────────────────────
+✧ Added dependency ‘slpp’ (Lua‑table parser)
+✧ Wrote  scripts/fetch_gems.py
+      • Downloads latest Gems.lua from Path of Building Community dev‑branch
+      • Parses Lua → Python dict → saves to SQLite
+✧ Ran script → 738 gems imported into  data/poe.db
+✧ Committed & pushed script + database
+
+────────────────────────────────────────
+3. Minimal GUI Prototype
+────────────────────────────────────────
+✧ Installed PySide6 6.7
+✧ Added  src/gui.py
+      • Opens data/poe.db
+      • Displays all gem names in a QListWidget
+✧ Tested launch:
+      (.venv) $ python src/gui.py
+
+────────────────────────────────────────
+4. Current Repo Layout
+────────────────────────────────────────
+poe-build-planner/
+├─ .venv/                 (ignored)
+├─ data/
+│   └─ poe.db             ← SQLite w/ gems
+├─ scripts/
+│   ├─ fetch_gems.py      ← import script
+│   └─ …                  (future)
+├─ src/
+│   └─ gui.py             ← Qt prototype
+└─ requirements.txt
+
+────────────────────────────────────────
+5. How to Run on Any Machine
+────────────────────────────────────────
+$ git clone https://github.com/Chinmorph/poe-build-planner.git
+$ cd poe-build-planner
+$ python -m venv .venv
+$ .venv\Scripts\activate          # or source .venv/bin/activate
+$ python -m pip install -r requirements.txt
+$ python scripts\fetch_gems.py     # refresh database (optional)
+$ python src\gui.py                # start GUI
+
+Deactivate venv:  (.venv) > deactivate
+
+────────────────────────────────────────
+6. Next Suggested Milestones
+────────────────────────────────────────
+□ Import Items.lua & Mods.lua → extend database
+□ Add search/filter bar to GUI (by gem tag, name)
+□ Package CLI entry‑point (`poe-build`) for easier commands
+□ Auto‑update data when DB older than 30 days
+
+────────────────────────────────────────
+7. Communication Guidelines for ChatGPT
+────────────────────────────────────────
+• Always give ONE clear action or command at a time.
+• Wait for my confirmation (e.g. “ok” / error) before next step.
+• Use copy‑pasteable PowerShell commands for Windows examples.
+• Preface long code files with a short sentence (“Create … with:”).
+• Keep explanations concise; no extra theory unless I ask.
+• German is fine for casual conversation; keep commands in English.
+• Summarise progress when switching context or after long sessions.
+
+────────────────────────────────────────
+End of summary.
